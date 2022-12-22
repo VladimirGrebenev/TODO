@@ -9,8 +9,12 @@ class User(models.Model):
     last_name = models.CharField(max_length=64, verbose_name='lastname')
     username = models.CharField(max_length=64, verbose_name='username')
     user_email = models.EmailField(max_length=256, unique=True, blank=False, verbose_name='email')
-    created = models.DateTimeField(null=True, blank=True)
-    updated = models.DateTimeField(null=True, blank=True)
+    created = models.DateTimeField(
+        auto_now_add=True, verbose_name="Created", editable=False, null=True
+    )
+    updated = models.DateTimeField(
+        auto_now=True, verbose_name="Edited", editable=False, null=True
+    )
     deleted = models.BooleanField(default=False)
 
     def __str__(self) -> str:
