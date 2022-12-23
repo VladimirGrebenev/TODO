@@ -9,15 +9,22 @@ class Command(BaseCommand):
         test_users_list = []
         CustomUser.objects.filter(email__startswith='test').delete()
         for i in range(3):
-            test_users_list.append(CustomUser(
-                first_name=f'testFirst{i}',
-                last_name=f'testLast{i}',
-                user_name=f'testName{i}',
-                email=f'testMail{i}@mail.ru',
-                password=f'test{i}'
-            ))
-
-        CustomUser.objects.bulk_create(test_users_list)
+            CustomUser.objects.create_user(
+                            first_name=f'testFirst{i}',
+                            last_name=f'testLast{i}',
+                            user_name=f'testName{i}',
+                            email=f'testMail{i}@mail.ru',
+                            password=f'test{i}'
+            )
+        #     test_users_list.append(CustomUser(
+        #         first_name=f'testFirst{i}',
+        #         last_name=f'testLast{i}',
+        #         user_name=f'testName{i}',
+        #         email=f'testMail{i}@mail.ru',
+        #         password=f'test{i}'
+        #     ))
+        #
+        # CustomUser.objects.bulk_create(test_users_list)
 
         # добавляем тестового админа superuser
         CustomUser.objects.filter(email='admin@mail.ru').delete()
