@@ -1,24 +1,24 @@
 from django.core.management.base import BaseCommand
 
-from users.models import User as User_TODO
-from django.contrib.auth.models import User
+from users.models import CustomUser
 
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # добавляем тестовых пользователей
         test_users_list = []
-        User_TODO.objects.filter(username__startswith='testUN').delete()
+        CustomUser.objects.filter(email__startswith='test').delete()
         for i in range(3):
-            test_users_list.append(User_TODO(
-                first_name=f'testuserFN{i}',
-                last_name=f'testuserLN{i}',
-                username=f'testUN{i}',
-                user_email=f'testUM{i}@mail.ru'
+            test_users_list.append(CustomUser(
+                first_name=f'testFirst{i}',
+                last_name=f'testLast{i}',
+                user_name=f'testName{i}',
+                email=f'testMail{i}@mail.ru',
+                password=f'test{i}'
             ))
 
-        User_TODO.objects.bulk_create(test_users_list)
+        CustomUser.objects.bulk_create(test_users_list)
 
         # добавляем тестового админа superuser
-        User.objects.filter(email='admin@mail.ru').delete()
-        User.objects.create_superuser('admin', 'admin@mail.ru', 'admin')
+        CustomUser.objects.filter(email='admin@mail.ru').delete()
+        CustomUser.objects.create_superuser('admin@mail.ru', 'admin', user_name='admin')
