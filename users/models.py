@@ -1,24 +1,32 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
+from django.utils import timezone
 from uuid import uuid4
-from rest_framework import serializers
+
+from .managers import CustomUserManager
+
 # Create your models here.
 
-class User(models.Model):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(default=uuid4, primary_key=True, verbose_name='id')
     first_name = models.CharField(max_length=64, verbose_name='firstname')
     last_name = models.CharField(max_length=64, verbose_name='lastname')
-    username = models.CharField(max_length=64, verbose_name='username')
-    user_email = models.EmailField(max_length=256, unique=True, blank=False, verbose_name='email')
-    created = models.DateTimeField(
-        auto_now_add=True, verbose_name="Created", editable=False, null=True
-    )
-    updated = models.DateTimeField(
-        auto_now=True, verbose_name="Edited", editable=False, null=True
-    )
+    user_name = models.CharField(max_length=64, verbose_name='username')
+    email = models.EmailField(max_length=256, unique=True, blank=False, verbose_name='email')
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    date_joined = models.DateTimeField(default=timezone.now, verbose_name="Created")
+    updated = models.DateTimeField(default=timezone.now, verbose_name="Edited")
     deleted = models.BooleanField(default=False)
 
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
+
     def __str__(self) -> str:
-        return f"{self.id} {self.username}"
+        return f"{self.user_name} {self.email}"
 
     def delete(self, *args):
         self.deleted = True
@@ -27,4 +35,4 @@ class User(models.Model):
     class Meta:
         verbose_name = ("Пользователь TODO")
         verbose_name_plural = ("Пользователи TODO")
-        ordering = ("last_name",)
+        ordering = ("-date_joined",)
