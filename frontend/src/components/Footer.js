@@ -2,9 +2,12 @@ import React from 'react'
 
 
 const AddFooter = ({footer}) => {
+    let today = new Date();
+    let yyyy = today.getFullYear();
+
     return (
         <div className="footer">
-                ©2022 Your Company Name. All rights reserved.
+                © {yyyy} Your Company Name. All rights reserved.
         </div>
     )
 }
