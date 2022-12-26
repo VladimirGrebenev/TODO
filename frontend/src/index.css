@@ -34,6 +34,7 @@ code {
     background-color: #666;
     padding-left: 25px;
     min-width: 470px;
+    margin-bottom: 50px;
 }
 
 #navbar li {
@@ -61,4 +62,39 @@ code {
 
 #navbar ul li:hover {
     background-color: #666;
+}
+
+table {
+    width: 70%;
+    border-collapse: collapse;
+    margin-left: 30px;
+    padding-bottom: 30px;
+}
+
+td, th {
+    border: 1px solid #98bf21;
+    padding: 3px 7px 2px 7px;
+}
+
+th {
+    text-align: left;
+    padding: 5px;
+    background-color: #A7C942;
+    color: #fff;
+}
+
+.alt td {
+    background-color: #EAF2D3;
+}
+
+.footer {
+    margin-top: 40px;
+    padding: 2rem;
+    background: #666;
+    color: white;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
 }
