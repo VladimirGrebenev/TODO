@@ -4,12 +4,12 @@ from .models import Project, ToDoTask
 class ProjectSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Project
-        exclude = ['users']
+        fields = '__all__'
 
 
 class ToDoTaskSerializer(HyperlinkedModelSerializer):
     project = ProjectSerializer()
-    users = StringRelatedField(many=True)
+    user = StringRelatedField()
     class Meta:
         model = ToDoTask
-        exclude = '__aLL__'
+        fields = '__all__'

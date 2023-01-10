@@ -8,7 +8,7 @@ class Project(models.Model):
     name = models.CharField(max_length=32)
     created = models.DateTimeField(default=timezone.now, verbose_name='Created')
     repo_link = models.CharField(max_length=128)
-    users = models.ManyToManyField(CustomUser)
+
 
     class Meta:
         verbose_name = ("Проект")
