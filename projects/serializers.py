@@ -1,4 +1,4 @@
-from rest_framework.serializers import StringRelatedField , ModelSerializer
+from rest_framework.serializers import ModelSerializer
 from rest_framework.relations import StringRelatedField
 from .models import Project, ToDoTask
 
