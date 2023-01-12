@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from .models import Project, ToDoTask
-from .serializers import ProjectModelSerializer, ToDoTaskModelSerializer
+from .serializers import ProjectModelSerializer, ToDoTaskHyperlinkedModelSerializer
 
 
 # Create your views here.
@@ -11,4 +11,4 @@ class ProjectModelViewSet(ModelViewSet):
 
 class ToDoTaskModelViewSet(ModelViewSet):
     queryset = ToDoTask.objects.all()
-    serializer_class = ToDoTaskModelSerializer
+    serializer_class = ToDoTaskHyperlinkedModelSerializer
