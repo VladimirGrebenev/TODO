@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from .models import Project, ToDoTask
 from .serializers import ProjectSerializer, ToDoTaskSerializer

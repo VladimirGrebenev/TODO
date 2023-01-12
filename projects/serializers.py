@@ -2,6 +2,7 @@ from rest_framework.serializers import HyperlinkedModelSerializer, StringRelated
 from .models import Project, ToDoTask
 
 class ProjectSerializer(HyperlinkedModelSerializer):
+    users = StringRelatedField(many=True)
     class Meta:
         model = Project
         fields = '__all__'
@@ -9,7 +10,9 @@ class ProjectSerializer(HyperlinkedModelSerializer):
 
 class ToDoTaskSerializer(HyperlinkedModelSerializer):
     project = ProjectSerializer()
-    user = StringRelatedField()
+    auther = StringRelatedField()
     class Meta:
         model = ToDoTask
         fields = '__all__'
+
+
