@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
-from django.utils import timezone
 from uuid import uuid4
 
 from .managers import CustomUserManager
@@ -16,8 +15,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=256, unique=True, blank=False, verbose_name='email')
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    date_joined = models.DateTimeField(default=timezone.now, verbose_name="Created")
-    updated = models.DateTimeField(default=timezone.now, verbose_name="Edited")
+    date_joined = models.DateTimeField(auto_now_add=True, verbose_name="Created")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Edited")
     deleted = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
@@ -28,7 +27,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self) -> str:
         return f"{self.user_name} {self.email}"
 
-    def delete(self, *args):
+    def delete(self, *kwargs):
         self.deleted = True
         self.save()
 
