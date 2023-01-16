@@ -11,3 +11,5 @@ class UserCustomViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
     queryset = CustomUser.objects.all()
     serializer_class = UserModelSerializer
 
+    def get_queryset(self):
+        return CustomUser.objects.filter(is_active=True)
