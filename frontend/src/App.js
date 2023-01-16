@@ -8,7 +8,7 @@ import axios from 'axios';
 
 class App extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             'users': [],
             'menu_links': []
@@ -16,9 +16,10 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://127.0.0.1:8000/api/users/')
+        axios.get('http://127.0.0.1:8000/api/users_for_staff/')
             .then(response => {
-                const users = response.data
+                const users = response.data.results
+                console.log(users)
                 this.setState(
                     {
                         'users': users

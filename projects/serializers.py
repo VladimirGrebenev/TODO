@@ -11,8 +11,8 @@ class ProjectModelSerializer(ModelSerializer):
 
 
 class ToDoTaskModelSerializer(ModelSerializer):
-    # project = StringRelatedField()
-    # author = StringRelatedField()
+    project = StringRelatedField()
+    author = StringRelatedField()
     class Meta:
         model = ToDoTask
         fields = '__all__'
