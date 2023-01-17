@@ -4,6 +4,8 @@ import ProjectsList from "./components/Projects";
 import ToDoTasksList from "./components/ToDoTasks";
 import MenuList from "./components/Menu";
 import AddFooter from "./components/Footer";
+import ProjectDetails from "./components/ProjectDetails";
+import {HashRouter, Redirect, Route} from "react-router-dom";
 import axios from 'axios';
 
 
@@ -42,7 +44,6 @@ class App extends React.Component {
         axios.get('http://127.0.0.1:8000/api/todo-tasks/')
             .then(response => {
                 const todotasks = response.data.results
-                console.log(todotasks)
                 this.setState(
                     {
                         'todotasks': todotasks
@@ -52,24 +53,16 @@ class App extends React.Component {
 
         const menu_links = [
             {
-                'link_name': 'Main Page',
-                'menu_link': 'http://localhost:3000/'
+                'link_name': 'Проекты',
+                'menu_link': '/projects'
             },
             {
-                'link_name': 'Users list',
-                'menu_link': 'http://127.0.0.1:8000/api/users/'
+                'link_name': 'Задачи',
+                'menu_link': '/todos'
             },
             {
-                'link_name': 'Api',
-                'menu_link': 'http://127.0.0.1:8000/api/'
-            },
-            {
-                'link_name': 'Admin Panel',
-                'menu_link': 'http://127.0.0.1:8000/admin/'
-            },
-            {
-                'link_name': 'Api Auth',
-                'menu_link': 'http://127.0.0.1:8000/api-auth/'
+                'link_name': 'Пользователи',
+                'menu_link': '/users'
             },
         ]
         this.setState(
@@ -81,11 +74,15 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="App">
                 <MenuList menu_links={this.state.menu_links}/>
-                <UserList users={this.state.users}/>
-                <ProjectsList projects={this.state.projects}/>
-                <ToDoTasksList todotasks={this.state.todotasks}/>
+                <HashRouter>
+                    <Route exact path="/projects" component={() => <ProjectsList projects={this.state.projects}/>}/>
+                    <Route exact path="/todos" component={() => <ToDoTasksList todotasks={this.state.todotasks}/>}/>
+                    <Route exact path="/users" component={() => <UserList users={this.state.users}/>}/>
+                    <Route exact path="/project/:id" component={() => <ProjectDetails todotasks={this.state.todotasks}/>}/>
+                    {/*<Redirect from="/" to="/project" />*/}
+                </HashRouter>
                 <AddFooter/>
             </div>
         )

@@ -1,8 +1,13 @@
 import React from 'react'
+import {Link, HashRouter} from "react-router-dom";
 
 const MenuLink = ({link}) => {
     return (
-        <a className="navbar-item" href={link.menu_link}> {link.link_name} </a>
+        <HashRouter>
+            <Link to={link.menu_link} className="navbar-item">{link.link_name}</Link>
+        </HashRouter>
+
+        // <a className="navbar-item" href={link.menu_link}> {link.link_name} </a>
     )
 }
 
