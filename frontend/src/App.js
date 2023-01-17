@@ -5,7 +5,7 @@ import ToDoTasksList from "./components/ToDoTasks";
 import MenuList from "./components/Menu";
 import AddFooter from "./components/Footer";
 import ProjectDetails from "./components/ProjectDetails";
-import {HashRouter, Redirect, Route} from "react-router-dom";
+import {BrowserRouter, Link, Redirect, Route, Switch} from "react-router-dom";
 import axios from 'axios';
 
 
@@ -75,14 +75,17 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <MenuList menu_links={this.state.menu_links}/>
-                <HashRouter>
-                    <Route exact path="/projects" component={() => <ProjectsList projects={this.state.projects}/>}/>
-                    <Route exact path="/todos" component={() => <ToDoTasksList todotasks={this.state.todotasks}/>}/>
-                    <Route exact path="/users" component={() => <UserList users={this.state.users}/>}/>
-                    <Route exact path="/project/:id" component={() => <ProjectDetails todotasks={this.state.todotasks}/>}/>
-                    {/*<Redirect from="/" to="/project" />*/}
-                </HashRouter>
+                <BrowserRouter>
+                    <MenuList menu_links={this.state.menu_links}/>
+                    <Switch>
+                        <Route exact path='/projects' component={() => <ProjectsList projects={this.state.projects}/>}/>
+                        <Route exact path='/todos' component={() => <ToDoTasksList todotasks={this.state.todotasks}/>}/>
+                        <Route exact path='/users' component={() => <UserList users={this.state.users}/>}/>
+                        <Route exact path='/project/:id'
+                               component={() => <ProjectDetails todotasks={this.state.todotasks}/>}/>
+                        <Redirect from='/' to='/projects'/>
+                    </Switch>
+                </BrowserRouter>
                 <AddFooter/>
             </div>
         )

@@ -2,6 +2,7 @@ import React from "react"
 import {useParams} from "react-router-dom"
 
 const ToDoItem = ({todotask}) => {
+    console.log(todotask.project)
     return (
         <tr>
             <td>{todotask.id}</td>
@@ -15,11 +16,14 @@ const ToDoItem = ({todotask}) => {
     )
 }
 
+// не могу подзагрузить информацию в компоненте ProjectDetails(список дел) по сслыке через ID проекта,
+//     не понимаю как обратиться к связанной таблице Project. Массив приходит пустой так как не фильтрует
+// корректно по id.
 const ProjectDetails = ({todotasks}) => {
     let {id} = useParams()
-    console.log(id)
-    let filtered_todotasks = todotasks.filter((todotask) => todotask.project.id == id)
-    console.log(filtered_todotasks)
+    // console.log(id)
+    let filtered_todotasks = todotasks.filter((todotask) => todotask.project.id == true)
+    // console.log(filtered_todotasks)
     return (
         <div className="section is-medium">
             <p className="title">

@@ -8,7 +8,7 @@ const ProjectItem = ({project}) => {
                 <Link to={`project/${project.id}`}>{project.id}</Link>
             </td>
             <td>{project.title}</td>
-            <td>{project.users}</td>
+            <td>{project.users.join(', ', '')}</td>
             <td>{project.repo_link}</td>
         </tr>
     )

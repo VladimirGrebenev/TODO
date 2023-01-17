@@ -1,13 +1,13 @@
 import React from 'react'
-import {Link, HashRouter} from "react-router-dom";
+import {Link, BrowserRouter} from "react-router-dom";
 
 const MenuLink = ({link}) => {
     return (
-        <HashRouter>
-            <Link to={link.menu_link} className="navbar-item">{link.link_name}</Link>
-        </HashRouter>
-
+        <Link to={link.menu_link} className="navbar-item">{link.link_name}</Link>
         // <a className="navbar-item" href={link.menu_link}> {link.link_name} </a>
+        // 1) при переходе по меню, браузер забирает ссылку в адресную строку, но не обновляет страницу,
+        // и  только после того как нажмёшь enter в адресной строке браузера идёт обновление данных/или
+        // загрузка
     )
 }
 
@@ -19,7 +19,7 @@ const MenuList = ({menu_links}) => {
     return (
         <nav className="navbar has-shadow" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
-                <a className="navbar-item" href="https://www.veneberg81.ru/">
+                <a className="navbar-item" href="http://localhost:3000/">
                     <img src="https://www.veneberg81.ru/img/logo_v81_640_160.png"
                          width="112" height="28" alt="Veneberg81"></img>
                 </a>
@@ -33,9 +33,7 @@ const MenuList = ({menu_links}) => {
 
             <div id="navbarBasicExample" className="navbar-menu">
                 <div className="navbar-start">
-
-                    {menu_links.map((link) => <MenuLink link={link}/>)}
-
+                        {menu_links.map((link) => <MenuLink link={link}/>)}
 
                     {/*<div className="navbar-item has-dropdown is-hoverable">*/}
                     {/*    <a className="navbar-link">*/}
