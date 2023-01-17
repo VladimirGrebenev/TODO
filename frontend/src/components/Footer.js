@@ -6,9 +6,13 @@ const AddFooter = ({footer}) => {
     let yyyy = today.getFullYear();
 
     return (
-        <div className="footer">
-                © {yyyy} Your Company Name. All rights reserved.
-        </div>
+        <footer className="footer">
+            <div className="content has-text-centered">
+                <p>
+                    <strong>TODOS</strong> by <a href="https://www.veneberg81.ru/">Veneberg81</a>.  © {yyyy}
+                </p>
+            </div>
+        </footer>
     )
 }
 
