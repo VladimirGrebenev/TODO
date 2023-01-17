@@ -1,5 +1,7 @@
 import React from "react";
 import UserList from "./components/User";
+import ProjectsList from "./components/Projects";
+import ToDoTasksList from "./components/ToDoTasks";
 import MenuList from "./components/Menu";
 import AddFooter from "./components/Footer";
 import axios from 'axios';
@@ -10,6 +12,8 @@ class App extends React.Component {
         super(props);
         this.state = {
             'users': [],
+            'projects': [],
+            'todotasks': [],
             'menu_links': []
         }
     }
@@ -21,6 +25,27 @@ class App extends React.Component {
                 this.setState(
                     {
                         'users': users
+                    }
+                )
+            }).catch(error => console.log(error))
+
+        axios.get('http://127.0.0.1:8000/api/projects/')
+            .then(response => {
+                const projects = response.data.results
+                this.setState(
+                    {
+                        'projects': projects
+                    }
+                )
+            }).catch(error => console.log(error))
+
+        axios.get('http://127.0.0.1:8000/api/todo-tasks/')
+            .then(response => {
+                const todotasks = response.data.results
+                console.log(todotasks)
+                this.setState(
+                    {
+                        'todotasks': todotasks
                     }
                 )
             }).catch(error => console.log(error))
@@ -59,6 +84,8 @@ class App extends React.Component {
             <div>
                 <MenuList menu_links={this.state.menu_links}/>
                 <UserList users={this.state.users}/>
+                <ProjectsList projects={this.state.projects}/>
+                <ToDoTasksList todotasks={this.state.todotasks}/>
                 <AddFooter/>
             </div>
         )
