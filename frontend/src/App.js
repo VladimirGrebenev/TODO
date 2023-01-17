@@ -1,5 +1,4 @@
 import React from "react";
-import './App.css';
 import UserList from "./components/User";
 import MenuList from "./components/Menu";
 import AddFooter from "./components/Footer";
@@ -19,7 +18,6 @@ class App extends React.Component {
         axios.get('http://127.0.0.1:8000/api/users_for_staff/')
             .then(response => {
                 const users = response.data.results
-                console.log(users)
                 this.setState(
                     {
                         'users': users
@@ -61,7 +59,7 @@ class App extends React.Component {
             <div>
                 <MenuList menu_links={this.state.menu_links}/>
                 <UserList users={this.state.users}/>
-                <AddFooter />
+                <AddFooter/>
             </div>
         )
     }

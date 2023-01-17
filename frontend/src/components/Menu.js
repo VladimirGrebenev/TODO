@@ -7,14 +7,19 @@ const MenuLink = ({link}) => {
 }
 
 const MenuList = ({menu_links}) => {
+    function toggleBurgerMenu() {
+        document.querySelector('.navbar-menu').classList.toggle('is-active');
+    }
+
     return (
         <nav className="navbar has-shadow" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
                 <a className="navbar-item" href="https://www.veneberg81.ru/">
-                    <img src="https://www.veneberg81.ru/img/logo_v81_640_160.png" width="112" height="28"></img>
+                    <img src="https://www.veneberg81.ru/img/logo_v81_640_160.png"
+                         width="112" height="28" alt="Veneberg81"></img>
                 </a>
                 <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false"
-                   data-target="navbarBasicExample">
+                   data-target="navbarBasicExample" onClick={toggleBurgerMenu}>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -60,7 +65,7 @@ const MenuList = ({menu_links}) => {
                 </div>
             </div>
         </nav>
-)
+    )
 }
 
 export default MenuList
