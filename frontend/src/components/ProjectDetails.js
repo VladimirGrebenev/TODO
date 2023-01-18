@@ -16,15 +16,15 @@ const ToDoItem = ({todotask}) => {
 }
 
 const ProjectDetails = ({projects, todotasks}) => {
-    let params = useParams();
-    let filtered_projects = projects.filter((project) => project.id === params.id);
-    console.log(filtered_projects);
-    let x = filtered_projects[0];
+    const params = useParams();
+    const filtered_projects = projects.find((project) => project.id === params.id);
+    const x = filtered_projects;
     console.log(x);
-    // let y = x['title']
-    // console.log(y);
+    const y = x?.title;
+    console.log(y);
 
-    let filtered_todotasks = todotasks.filter((todotask) => todotask.project === filtered_projects.title);
+
+    let filtered_todotasks = todotasks.filter((todotask) => todotask.project === x?.title);
     return (
         <div className="section is-medium">
             <p className="title">
