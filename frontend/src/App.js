@@ -82,7 +82,7 @@ class App extends React.Component {
                         <Route exact path='/todos' component={() => <ToDoTasksList todotasks={this.state.todotasks}/>}/>
                         <Route exact path='/users' component={() => <UserList users={this.state.users}/>}/>
                         <Route exact path='/project/:id'
-                               component={() => <ProjectDetails todotasks={this.state.todotasks}/>}/>
+                               component={() => <ProjectDetails todotasks={this.state.todotasks} projects={this.state.projects}/>}/>
                         <Redirect from='/' to='/projects'/>
                     </Switch>
                 </BrowserRouter>
