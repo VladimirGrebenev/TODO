@@ -25,7 +25,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
 
     def __str__(self) -> str:
-        return f"{self.user_name} {self.email}"
+        return f"{self.user_name}"
 
     def delete(self, *kwargs):
         self.deleted = True

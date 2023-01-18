@@ -14,24 +14,24 @@ const UserItem = ({user}) => {
 
 const UserList = ({users}) => {
     return (
-        <table>
-            <th>
-                First name
-            </th>
-            <th>
-                Last name
-            </th>
-            <th>
-                User Name
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Date joined
-            </th>
-            {users.map((user) => <UserItem user={user}/>)}
-        </table>
+        <div className="section is-medium">
+            <p className="title">
+                Пользователи TODOS
+            </p>
+            <p className="subtitle">
+                таблица доступных пользователей
+            </p>
+            <table className="table is-narrow is-fullwidth">
+                <thead className="has-background-info-light">
+                <th>First name</th>
+                <th>Last name</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Date joined</th>
+                </thead>
+                {users.map((user) => <UserItem user={user}/>)}
+            </table>
+        </div>
     )
 }
 

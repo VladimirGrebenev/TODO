@@ -1,8 +1,11 @@
 import React from "react";
-import './App.css';
 import UserList from "./components/User";
+import ProjectsList from "./components/Projects";
+import ToDoTasksList from "./components/ToDoTasks";
 import MenuList from "./components/Menu";
 import AddFooter from "./components/Footer";
+import ProjectDetails from "./components/ProjectDetails";
+import {BrowserRouter, Link, Redirect, Route, Switch} from "react-router-dom";
 import axios from 'axios';
 
 
@@ -11,6 +14,8 @@ class App extends React.Component {
         super(props);
         this.state = {
             'users': [],
+            'projects': [],
+            'todotasks': [],
             'menu_links': []
         }
     }
@@ -19,7 +24,6 @@ class App extends React.Component {
         axios.get('http://127.0.0.1:8000/api/users_for_staff/')
             .then(response => {
                 const users = response.data.results
-                console.log(users)
                 this.setState(
                     {
                         'users': users
@@ -27,26 +31,38 @@ class App extends React.Component {
                 )
             }).catch(error => console.log(error))
 
+        axios.get('http://127.0.0.1:8000/api/projects/')
+            .then(response => {
+                const projects = response.data.results
+                this.setState(
+                    {
+                        'projects': projects
+                    }
+                )
+            }).catch(error => console.log(error))
+
+        axios.get('http://127.0.0.1:8000/api/todo-tasks/')
+            .then(response => {
+                const todotasks = response.data.results
+                this.setState(
+                    {
+                        'todotasks': todotasks
+                    }
+                )
+            }).catch(error => console.log(error))
+
         const menu_links = [
             {
-                'link_name': 'Main Page',
-                'menu_link': 'http://localhost:3000/'
+                'link_name': 'Проекты',
+                'menu_link': '/projects'
             },
             {
-                'link_name': 'Users list',
-                'menu_link': 'http://127.0.0.1:8000/api/users/'
+                'link_name': 'Задачи',
+                'menu_link': '/todos'
             },
             {
-                'link_name': 'Api',
-                'menu_link': 'http://127.0.0.1:8000/api/'
-            },
-            {
-                'link_name': 'Admin Panel',
-                'menu_link': 'http://127.0.0.1:8000/admin/'
-            },
-            {
-                'link_name': 'Api Auth',
-                'menu_link': 'http://127.0.0.1:8000/api-auth/'
+                'link_name': 'Пользователи',
+                'menu_link': '/users'
             },
         ]
         this.setState(
@@ -58,10 +74,19 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
-                <MenuList menu_links={this.state.menu_links}/>
-                <UserList users={this.state.users}/>
-                <AddFooter />
+            <div className="App">
+                <BrowserRouter>
+                    <MenuList menu_links={this.state.menu_links}/>
+                    <Switch>
+                        <Route exact path='/projects' component={() => <ProjectsList projects={this.state.projects}/>}/>
+                        <Route exact path='/todos' component={() => <ToDoTasksList todotasks={this.state.todotasks}/>}/>
+                        <Route exact path='/users' component={() => <UserList users={this.state.users}/>}/>
+                        <Route exact path='/project/:id'
+                               component={() => <ProjectDetails todotasks={this.state.todotasks} projects={this.state.projects}/>}/>
+                        <Redirect from='/' to='/projects'/>
+                    </Switch>
+                </BrowserRouter>
+                <AddFooter/>
             </div>
         )
     }
