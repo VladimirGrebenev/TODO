@@ -17,18 +17,12 @@ const ToDoItem = ({todotask}) => {
 
 const ProjectDetails = ({projects, todotasks}) => {
     const params = useParams();
-    const filtered_projects = projects.find((project) => project.id === params.id);
-    const x = filtered_projects;
-    console.log(x);
-    const y = x?.title;
-    console.log(y);
-
-
-    let filtered_todotasks = todotasks.filter((todotask) => todotask.project === x?.title);
+    const filtered_project = projects.find((project) => project.id === params.id);
+    const filtered_todotasks = todotasks.filter((todotask) => todotask.project === filtered_project?.title);
     return (
         <div className="section is-medium">
             <p className="title">
-                Список задач проекта
+                Список задач проекта: {filtered_project?.title}
             </p>
             <p className="subtitle">
                 таблица доступных задач
