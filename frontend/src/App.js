@@ -7,6 +7,7 @@ import AddFooter from "./components/Footer";
 import ProjectDetails from "./components/ProjectDetails";
 import {BrowserRouter, Link, Redirect, Route, Switch} from "react-router-dom";
 import axios from 'axios';
+import UserProjects from "./components/UserProjects";
 
 
 class App extends React.Component {
@@ -83,6 +84,8 @@ class App extends React.Component {
                         <Route exact path='/users' component={() => <UserList users={this.state.users}/>}/>
                         <Route exact path='/project/:id'
                                component={() => <ProjectDetails todotasks={this.state.todotasks} projects={this.state.projects}/>}/>
+                        <Route exact path='/user/:id'
+                               component={() => <UserProjects users={this.state.users} projects={this.state.projects}/>}/>
                         <Redirect from='/' to='/projects'/>
                     </Switch>
                 </BrowserRouter>
