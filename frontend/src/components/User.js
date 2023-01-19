@@ -1,8 +1,12 @@
 import React from "react"
+import {Link} from "react-router-dom";
 
 const UserItem = ({user}) => {
     return (
         <tr>
+            <td>
+                <Link to={`user/${user.id}`}>{user.id}</Link>
+            </td>
             <td>{user.first_name}</td>
             <td>{user.last_name}</td>
             <td>{user.user_name}</td>
@@ -23,6 +27,7 @@ const UserList = ({users}) => {
             </p>
             <table className="table is-narrow is-fullwidth">
                 <thead className="has-background-info-light">
+                <th>User ID</th>
                 <th>First name</th>
                 <th>Last name</th>
                 <th>User Name</th>
