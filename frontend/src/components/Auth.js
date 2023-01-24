@@ -3,7 +3,7 @@ import React from "react";
 class LoginForm extends React.Component {
     constructor(props) {
         super();
-        this.state = {login: '', password: ''}
+        this.state = {email: '', password: ''}
     }
 
     handleChange(event) {
@@ -16,7 +16,7 @@ class LoginForm extends React.Component {
 
 
     habdleSubmit(event) {
-        console.log(this.state.login + ' ' + this.state.password)
+        this.props.get_token(this.state.email, this.state.password)
         event.preventDefault()
     }
 
@@ -29,10 +29,10 @@ class LoginForm extends React.Component {
                     <div className="column is-one-third">
                         <form onSubmit={(event) => this.habdleSubmit(event)}>
                     <div className="field">
-                        <label className="label">Login</label>
+                        <label className="label">Email</label>
                         <div className="control has-icons-left">
-                            <input className="input" type="text" name="login" placeholder="login"
-                                   value={this.state.login} onChange={(event) => this.handleChange(event)}/>
+                            <input className="input" type="text" name="email" placeholder="email"
+                                   value={this.state.email} onChange={(event) => this.handleChange(event)}/>
                             <span className="icon is-small is-left">
                                 <i className="fa-envelope"></i>
                             </span>
