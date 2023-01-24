@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, Route} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const MenuLink = ({link}) => {
     return (
@@ -7,7 +7,7 @@ const MenuLink = ({link}) => {
     )
 }
 
-const MenuList = ({menu_links, login_link}) => {
+const MenuList = ({menu_links, is_auth}) => {
     function toggleBurgerMenu() {
         document.querySelector('.navbar-menu').classList.toggle('is-active');
     }
@@ -35,11 +35,8 @@ const MenuList = ({menu_links, login_link}) => {
                 <div className="navbar-end">
                     <div className="navbar-item">
                         <div className="buttons">
-                            <Link onClick={() => this.logout()} className="button is-primary">
-                                Log out
-                            </Link>
-                            <Link to="/login" className="button is-light">Login</Link>
-
+                            {is_auth}
+                            {console.log(is_auth)}
                         </div>
                     </div>
                 </div>

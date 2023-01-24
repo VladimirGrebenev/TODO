@@ -68,6 +68,7 @@ class App extends React.Component {
         return headers
     }
 
+
     load_data() {
         this.load_menu()
         const headers = this.get_headers()
@@ -87,7 +88,18 @@ class App extends React.Component {
             }).catch(error => console.log(error))
     }
 
+    get_login_link() {
+        if (this.is_authenticated()) {
+            return <button className="button is-light" onClick={() => this.logout()}>Log out</button>
+        } else {
+            return (
+                <Link to="/login" className="button is-primary">Log in</Link>
+            );
+        }
+    }
+
     load_menu() {
+        let is_auth_link = this.get_login_link()
         const menu_links = [
             {
                 'link_name': 'Проекты',
@@ -103,9 +115,8 @@ class App extends React.Component {
             },
         ]
 
-
         this.setState(
-            {'menu_links': menu_links}
+            {'menu_links': menu_links, 'is_auth_link': is_auth_link}
         )
 
     }
@@ -119,13 +130,7 @@ class App extends React.Component {
         return (
             <div className="App">
                 <BrowserRouter>
-
-                    {this.is_authenticated()
-                        ? <button onClick={() => this.logout()}>Log out</button>
-                        : <Link to="/login" className="button is-light">log in</Link>}
-
-
-                    <MenuList menu_links={this.state.menu_links} />
+                    <MenuList menu_links={this.state.menu_links} is_auth={this.state.is_auth_link}/>
                     <Switch>
                         <Route exact path='/projects' component={() => <ProjectsList projects={this.state.projects}/>}/>
                         <Route exact path='/todos' component={() => <ToDoTasksList todotasks={this.state.todotasks}/>}/>
