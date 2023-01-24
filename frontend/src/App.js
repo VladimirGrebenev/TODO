@@ -9,6 +9,13 @@ import {BrowserRouter, Link, Redirect, Route, Switch} from "react-router-dom";
 import axios from 'axios';
 import UserProjects from "./components/UserProjects";
 
+const NotFound404 = ({location}) => {
+    return (
+        <div>
+            <h1>Страница по адресу '{location.pathname}' не найдена</h1>
+        </div>
+    )
+}
 
 class App extends React.Component {
     constructor(props) {
@@ -21,37 +28,24 @@ class App extends React.Component {
         }
     }
 
-    componentDidMount() {
+    load_data() {
         axios.get('http://127.0.0.1:8000/api/users_for_staff/')
             .then(response => {
-                const users = response.data.results
-                this.setState(
-                    {
-                        'users': users
-                    }
-                )
+                this.setState({users: response.data.results})
             }).catch(error => console.log(error))
 
         axios.get('http://127.0.0.1:8000/api/projects/')
             .then(response => {
-                const projects = response.data.results
-                this.setState(
-                    {
-                        'projects': projects
-                    }
-                )
+                this.setState({projects: response.data.results})
             }).catch(error => console.log(error))
 
         axios.get('http://127.0.0.1:8000/api/todo-tasks/')
             .then(response => {
-                const todotasks = response.data.results
-                this.setState(
-                    {
-                        'todotasks': todotasks
-                    }
-                )
+                this.setState({todotasks: response.data.results})
             }).catch(error => console.log(error))
+    }
 
+    load_menu() {
         const menu_links = [
             {
                 'link_name': 'Проекты',
@@ -73,6 +67,11 @@ class App extends React.Component {
         )
     }
 
+    componentDidMount() {
+        this.load_data()
+        this.load_menu()
+    }
+
     render() {
         return (
             <div className="App">
@@ -83,10 +82,13 @@ class App extends React.Component {
                         <Route exact path='/todos' component={() => <ToDoTasksList todotasks={this.state.todotasks}/>}/>
                         <Route exact path='/users' component={() => <UserList users={this.state.users}/>}/>
                         <Route exact path='/project/:id'
-                               component={() => <ProjectDetails todotasks={this.state.todotasks} projects={this.state.projects}/>}/>
+                               component={() => <ProjectDetails todotasks={this.state.todotasks}
+                                                                projects={this.state.projects}/>}/>
                         <Route exact path='/user/:id'
-                               component={() => <UserProjects users={this.state.users} projects={this.state.projects}/>}/>
+                               component={() => <UserProjects users={this.state.users}
+                                                              projects={this.state.projects}/>}/>
                         <Redirect from='/' to='/projects'/>
+                        <Route component={NotFound404}/>
                     </Switch>
                 </BrowserRouter>
                 <AddFooter/>
