@@ -5,7 +5,8 @@ import ToDoTasksList from "./components/ToDoTasks";
 import MenuList from "./components/Menu";
 import AddFooter from "./components/Footer";
 import ProjectDetails from "./components/ProjectDetails";
-import {BrowserRouter, Link, Redirect, Route, Switch} from "react-router-dom";
+import LoginForm from "./components/Auth";
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import axios from 'axios';
 import UserProjects from "./components/UserProjects";
 
@@ -81,6 +82,7 @@ class App extends React.Component {
                         <Route exact path='/projects' component={() => <ProjectsList projects={this.state.projects}/>}/>
                         <Route exact path='/todos' component={() => <ToDoTasksList todotasks={this.state.todotasks}/>}/>
                         <Route exact path='/users' component={() => <UserList users={this.state.users}/>}/>
+                        <Route exact path='/login' component={() => <LoginForm/>}/>
                         <Route exact path='/project/:id'
                                component={() => <ProjectDetails todotasks={this.state.todotasks}
                                                                 projects={this.state.projects}/>}/>

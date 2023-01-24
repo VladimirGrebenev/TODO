@@ -1,13 +1,9 @@
 import React from 'react'
-import {Link, BrowserRouter} from "react-router-dom";
+import {Link, Route} from "react-router-dom";
 
 const MenuLink = ({link}) => {
     return (
         <Link to={link.menu_link} className="navbar-item">{link.link_name}</Link>
-        // <a className="navbar-item" href={link.menu_link}> {link.link_name} </a>
-        // 1) при переходе по меню, браузер забирает ссылку в адресную строку, но не обновляет страницу,
-        // и  только после того как нажмёшь enter в адресной строке браузера идёт обновление данных/или
-        // загрузка
     )
 }
 
@@ -60,9 +56,9 @@ const MenuList = ({menu_links}) => {
                             <a className="button is-primary">
                                 <strong>Sign up</strong>
                             </a>
-                            <a className="button is-light">
+                            <Link to="/login" className="button is-light">
                                 Log in
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
