@@ -30,24 +30,6 @@ const MenuList = ({menu_links}) => {
             <div id="navbarBasicExample" className="navbar-menu">
                 <div className="navbar-start">
                         {menu_links.map((link) => <MenuLink link={link}/>)}
-
-                    {/*<div className="navbar-item has-dropdown is-hoverable">*/}
-                    {/*    <a className="navbar-link">*/}
-                    {/*        More*/}
-                    {/*    </a>*/}
-
-                    {/*    <div className="navbar-dropdown">*/}
-                    {/*        <a className="navbar-item">*/}
-                    {/*            About*/}
-                    {/*        </a>*/}
-                    {/*        <a className="navbar-item">*/}
-                    {/*            Jobs*/}
-                    {/*        </a>*/}
-                    {/*        <a className="navbar-item">*/}
-                    {/*            Contact*/}
-                    {/*        </a>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
                 </div>
 
                 <div className="navbar-end">
@@ -59,6 +41,7 @@ const MenuList = ({menu_links}) => {
                             <Link to="/login" className="button is-light">
                                 Log in
                             </Link>
+
                         </div>
                     </div>
                 </div>

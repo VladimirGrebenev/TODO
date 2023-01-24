@@ -1,7 +1,6 @@
 import React from "react"
 
 const ToDoItem = ({todotask}) => {
-    console.log(todotask.project)
     return (
         <tr>
             <td>{todotask.id}</td>
