@@ -7,7 +7,7 @@ const MenuLink = ({link}) => {
     )
 }
 
-const MenuList = ({menu_links}) => {
+const MenuList = ({menu_links, login_link}) => {
     function toggleBurgerMenu() {
         document.querySelector('.navbar-menu').classList.toggle('is-active');
     }
@@ -29,18 +29,16 @@ const MenuList = ({menu_links}) => {
 
             <div id="navbarBasicExample" className="navbar-menu">
                 <div className="navbar-start">
-                        {menu_links.map((link) => <MenuLink link={link}/>)}
+                    {menu_links.map((link) => <MenuLink link={link}/>)}
                 </div>
 
                 <div className="navbar-end">
                     <div className="navbar-item">
                         <div className="buttons">
-                            <a className="button is-primary">
-                                <strong>Sign up</strong>
-                            </a>
-                            <Link to="/login" className="button is-light">
-                                Log in
+                            <Link onClick={() => this.logout()} className="button is-primary">
+                                Log out
                             </Link>
+                            <Link to="/login" className="button is-light">Login</Link>
 
                         </div>
                     </div>

@@ -69,6 +69,7 @@ class App extends React.Component {
     }
 
     load_data() {
+        this.load_menu()
         const headers = this.get_headers()
         axios.get('http://127.0.0.1:8000/api/users_for_staff/', {headers})
             .then(response => {
@@ -102,6 +103,7 @@ class App extends React.Component {
             },
         ]
 
+
         this.setState(
             {'menu_links': menu_links}
         )
@@ -110,7 +112,7 @@ class App extends React.Component {
 
     componentDidMount() {
         this.get_token_from_storage()
-        this.load_menu()
+
     }
 
     render() {
@@ -123,7 +125,7 @@ class App extends React.Component {
                         : <Link to="/login" className="button is-light">log in</Link>}
 
 
-                    <MenuList menu_links={this.state.menu_links}/>
+                    <MenuList menu_links={this.state.menu_links} />
                     <Switch>
                         <Route exact path='/projects' component={() => <ProjectsList projects={this.state.projects}/>}/>
                         <Route exact path='/todos' component={() => <ToDoTasksList todotasks={this.state.todotasks}/>}/>
