@@ -33,7 +33,7 @@ class App extends React.Component {
 
     set_token(token) {
         const cookies = new Cookies()
-        cookies.set('token', token)
+        cookies.set('token', token, {maxAge: 3600})
         this.setState({'token': token}, () => this.load_data())
     }
 
