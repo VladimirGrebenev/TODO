@@ -43,6 +43,7 @@ class App extends React.Component {
 
     logout() {
         this.set_token('')
+        window.location.reload();
     }
 
     get_token_from_storage() {
