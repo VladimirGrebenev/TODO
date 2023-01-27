@@ -27,7 +27,9 @@ class App extends React.Component {
             'projects': [],
             'todotasks': [],
             'menu_links': [],
-            'token': ''
+            'token': '',
+            'email': '',
+            'authorized_user': '',
         }
     }
 
@@ -36,6 +38,7 @@ class App extends React.Component {
         cookies.set('token', token, {maxAge: 3600})
         cookies.set('email', email, {maxAge: 3600})
         this.setState({'token': token, 'email': email}, () => this.load_data())
+
         // window.location.href="/"
     }
 
@@ -78,11 +81,10 @@ class App extends React.Component {
 
         axios.get('http://127.0.0.1:8000/api/users_for_staff/', {headers})
             .then(response => {
-                this.setState({users: response.data.results})
-                // const filtered_user = users.find((user) => user.email === this.state.email);
-                // const filtered_name = filtered_user?.user_name;
-                // alert (filtered_name)
-
+                this.setState({users: response.data.results});
+                const authorized_user = response.data.results.find((user) => user.email === this.state.email)?.user_name;
+                this.setState({'authorized_user': authorized_user});
+                console.log(authorized_user);
             }).catch(error => console.log(error));
 
         axios.get('http://127.0.0.1:8000/api/projects/', {headers})
@@ -97,6 +99,7 @@ class App extends React.Component {
 
         this.load_menu();
     }
+
 
     get_login_link() {
         if (this.is_authenticated()) {
@@ -133,7 +136,6 @@ class App extends React.Component {
         this.setState(
             {'menu_links': menu_links, 'is_auth_link': is_auth_link}
         )
-
     }
 
     componentDidMount() {
