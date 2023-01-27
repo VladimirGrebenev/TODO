@@ -36,7 +36,6 @@ const MenuList = ({menu_links, is_auth}) => {
                     <div className="navbar-item">
                         <div className="buttons">
                             {is_auth}
-                            {console.log(is_auth)}
                         </div>
                     </div>
                 </div>

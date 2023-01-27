@@ -31,10 +31,12 @@ class App extends React.Component {
         }
     }
 
-    set_token(token) {
+    set_token(token, email='') {
         const cookies = new Cookies()
         cookies.set('token', token, {maxAge: 3600})
-        this.setState({'token': token}, () => this.load_data())
+        cookies.set('email', email, {maxAge: 3600})
+        this.setState({'token': token, 'email': email}, () => this.load_data())
+        // window.location.href="/"
     }
 
     is_authenticated() {
@@ -49,13 +51,15 @@ class App extends React.Component {
     get_token_from_storage() {
         const cookies = new Cookies()
         const token = cookies.get('token')
-        this.setState({'token': token}, () => this.load_data())
+        const email = cookies.get('email')
+        this.setState({'token': token, 'email': email}, () => this.load_data())
     }
 
     get_token(email, password) {
         axios.post('http://127.0.0.1:8000/api-token-auth/', {username: email, password: password})
             .then(response => {
-                this.set_token(response.data['token'])
+                this.set_token(response.data['token'], email)
+                alert('Вы авторизовались по почте: ' + email)
             }).catch(error => alert('Неверный логин или пароль'))
     }
 
@@ -69,32 +73,42 @@ class App extends React.Component {
         return headers
     }
 
-
     load_data() {
-        this.load_menu()
-        const headers = this.get_headers()
+        const headers = this.get_headers();
+
         axios.get('http://127.0.0.1:8000/api/users_for_staff/', {headers})
             .then(response => {
                 this.setState({users: response.data.results})
-            }).catch(error => console.log(error))
+                // const filtered_user = users.find((user) => user.email === this.state.email);
+                // const filtered_name = filtered_user?.user_name;
+                // alert (filtered_name)
+
+            }).catch(error => console.log(error));
 
         axios.get('http://127.0.0.1:8000/api/projects/', {headers})
             .then(response => {
                 this.setState({projects: response.data.results})
-            }).catch(error => console.log(error))
+            }).catch(error => console.log(error));
 
         axios.get('http://127.0.0.1:8000/api/todo-tasks/', {headers})
             .then(response => {
                 this.setState({todotasks: response.data.results})
-            }).catch(error => console.log(error))
+            }).catch(error => console.log(error));
+
+        this.load_menu();
     }
 
     get_login_link() {
         if (this.is_authenticated()) {
-            return <button className="button is-light" onClick={() => this.logout()}>Log out</button>
+            return (
+                <p>
+                    <button className="button is-primary">{this.state.email}</button>
+                    <button className="button is-light" onClick={() => this.logout()}>Log out</button>
+                </p>
+            )
         } else {
             return (
-                <Link to="/login" className="button is-primary">Log in</Link>
+                <Link to="/login" className="button is-link">Log in</Link>
             );
         }
     }
