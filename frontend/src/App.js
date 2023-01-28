@@ -33,12 +33,11 @@ class App extends React.Component {
         }
     }
 
-    set_token(token, email='') {
+    set_token(token, email = '') {
         const cookies = new Cookies()
         cookies.set('token', token, {maxAge: 3600})
         cookies.set('email', email, {maxAge: 3600})
         this.setState({'token': token, 'email': email}, () => this.load_data())
-
         // window.location.href="/"
     }
 
@@ -82,9 +81,6 @@ class App extends React.Component {
         axios.get('http://127.0.0.1:8000/api/users_for_staff/', {headers})
             .then(response => {
                 this.setState({users: response.data.results});
-                const authorized_user = response.data.results.find((user) => user.email === this.state.email)?.user_name;
-                this.setState({'authorized_user': authorized_user});
-                console.log(authorized_user);
             }).catch(error => console.log(error));
 
         axios.get('http://127.0.0.1:8000/api/projects/', {headers})
@@ -100,9 +96,20 @@ class App extends React.Component {
         this.load_menu();
     }
 
+    get_auth_user_name() {
+        const headers = this.get_headers();
+        axios.get('http://127.0.0.1:8000/api/users_for_staff/', {headers})
+            .then(response => {
+                this.setState({authorized_user: response.data.results.find(
+                    (user) => user.email === this.state.email)?.user_name})
+                console.log(response.data.results.find((user) => user.email === this.state.email)?.user_name)
+            }).catch(error => console.log(error));
+    }
+
 
     get_login_link() {
         if (this.is_authenticated()) {
+            this.get_auth_user_name()
             return (
                 <p>
                     <button className="button is-primary">{this.state.email}</button>
@@ -111,7 +118,10 @@ class App extends React.Component {
             )
         } else {
             return (
-                <Link to="/login" className="button is-link">Log in</Link>
+                <p>
+                    <button className="button is-primary">гость</button>
+                    <Link to="/login" className="button is-link">Log in</Link>
+                </p>
             );
         }
     }
@@ -140,7 +150,6 @@ class App extends React.Component {
 
     componentDidMount() {
         this.get_token_from_storage()
-
     }
 
     render() {
