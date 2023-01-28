@@ -1,17 +1,13 @@
 import React from 'react'
-import {Link, BrowserRouter} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const MenuLink = ({link}) => {
     return (
         <Link to={link.menu_link} className="navbar-item">{link.link_name}</Link>
-        // <a className="navbar-item" href={link.menu_link}> {link.link_name} </a>
-        // 1) при переходе по меню, браузер забирает ссылку в адресную строку, но не обновляет страницу,
-        // и  только после того как нажмёшь enter в адресной строке браузера идёт обновление данных/или
-        // загрузка
     )
 }
 
-const MenuList = ({menu_links}) => {
+const MenuList = ({menu_links, is_auth}) => {
     function toggleBurgerMenu() {
         document.querySelector('.navbar-menu').classList.toggle('is-active');
     }
@@ -33,36 +29,13 @@ const MenuList = ({menu_links}) => {
 
             <div id="navbarBasicExample" className="navbar-menu">
                 <div className="navbar-start">
-                        {menu_links.map((link) => <MenuLink link={link}/>)}
-
-                    {/*<div className="navbar-item has-dropdown is-hoverable">*/}
-                    {/*    <a className="navbar-link">*/}
-                    {/*        More*/}
-                    {/*    </a>*/}
-
-                    {/*    <div className="navbar-dropdown">*/}
-                    {/*        <a className="navbar-item">*/}
-                    {/*            About*/}
-                    {/*        </a>*/}
-                    {/*        <a className="navbar-item">*/}
-                    {/*            Jobs*/}
-                    {/*        </a>*/}
-                    {/*        <a className="navbar-item">*/}
-                    {/*            Contact*/}
-                    {/*        </a>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+                    {menu_links.map((link) => <MenuLink link={link}/>)}
                 </div>
 
                 <div className="navbar-end">
                     <div className="navbar-item">
                         <div className="buttons">
-                            <a className="button is-primary">
-                                <strong>Sign up</strong>
-                            </a>
-                            <a className="button is-light">
-                                Log in
-                            </a>
+                            {is_auth}
                         </div>
                     </div>
                 </div>

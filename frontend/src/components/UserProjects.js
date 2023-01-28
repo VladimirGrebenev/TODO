@@ -18,9 +18,7 @@ const UserProjects = ({users, projects}) => {
     const params = useParams();
     const filtered_user = users.find((user) => user.id === params.id);
     const filtered_name = filtered_user?.user_name;
-    console.log(filtered_name);
     const filtered_projects = projects.filter((project) => project.users.includes(filtered_name));
-    // console.log(filtered_projects)
     return (
         <div className="section is-medium">
             <p className="title">
