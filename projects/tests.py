@@ -2,8 +2,7 @@ import json
 from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIRequestFactory, force_authenticate, APIClient, APISimpleTestCase, APITestCase
-# from mixer.backend.django import mixer
-from django.contrib.auth.models import Group, Permission
+from mixer.backend.django import mixer
 from .models import CustomUser, Project, ToDoTask
 from .views import ProjectModelViewSet
 
@@ -52,3 +51,10 @@ class TestTodoViewSet(APITestCase):
     def test_get_list(self):
         response = self.client.get('/api/todo-tasks/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_get_detail(self):
+        todo_task = mixer.blend(ToDoTask, description='Посадить дерево')
+        response = self.client.get(f'/api/todo-tasks/{todo_task.id}/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_todo_task = json.loads(response.content)
+        self.assertEqual(response_todo_task['description'], 'Посадить дерево')
