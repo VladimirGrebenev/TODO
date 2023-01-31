@@ -96,20 +96,19 @@ class App extends React.Component {
         this.load_menu();
     }
 
-    get_auth_user_name() {
-        const headers = this.get_headers();
-        axios.get('http://127.0.0.1:8000/api/users_for_staff/', {headers})
-            .then(response => {
-                this.setState({authorized_user: response.data.results.find(
-                    (user) => user.email === this.state.email)?.user_name})
-                console.log(response.data.results.find((user) => user.email === this.state.email)?.user_name)
-            }).catch(error => console.log(error));
-    }
-
+    // get_auth_user_name() {
+    //     const headers = this.get_headers();
+    //     axios.get('http://127.0.0.1:8000/api/users_for_staff/', {headers})
+    //         .then(response => {
+    //             const all_users = response.data.results
+    //             const auth_user = all_users.find((user) => user.email === this.state.email)?.user_name;
+    //             this.setState({'authorized_user': auth_user})
+    //         }).catch(error => console.log(error));
+    // }
 
     get_login_link() {
         if (this.is_authenticated()) {
-            this.get_auth_user_name()
+            // this.get_auth_user_name()
             return (
                 <p>
                     <button className="button is-primary">{this.state.email}</button>
