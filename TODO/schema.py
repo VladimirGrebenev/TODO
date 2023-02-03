@@ -49,3 +49,5 @@ class Query(graphene.ObjectType):
         if user_name:
             todos = todos.filter(author__user_name=user_name)
         return todos
+
+schema = graphene.Schema(query=Query)
