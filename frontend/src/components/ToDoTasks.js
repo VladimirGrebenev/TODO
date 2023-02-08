@@ -1,7 +1,7 @@
 import React from "react"
 import {Link} from "react-router-dom";
 
-const ToDoItem = ({todotask}) => {
+const ToDoItem = ({todotask, delete_todo}) => {
     return (
         <tr>
             <td>{todotask.id}</td>
@@ -11,11 +11,16 @@ const ToDoItem = ({todotask}) => {
             <td>{todotask.updated}</td>
             <td>{todotask.author}</td>
             <td>{todotask.is_done}</td>
+            <td>
+                <button className='button is-danger' type='button'
+                        onClick={() => delete_todo(todotask.id)}>Удалить
+                </button>
+            </td>
         </tr>
     )
 }
 
-const ToDoTasksList = ({todotasks}) => {
+const ToDoTasksList = ({todotasks, delete_todo}) => {
     return (
         <div className="section is-medium">
             <p className="title">
@@ -33,8 +38,9 @@ const ToDoTasksList = ({todotasks}) => {
                 <th>Обновлена</th>
                 <th>Автор</th>
                 <th>Выполнено</th>
+                <th></th>
                 </thead>
-                {todotasks.map((todotask)=> <ToDoItem todotask={todotask}/>)}
+                {todotasks.map((todotask)=> <ToDoItem todotask={todotask} delete_todo={delete_todo}/>)}
             </table>
             <Link to='/todos/create'>Создать задачу</Link>
         </div>
