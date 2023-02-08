@@ -4,7 +4,7 @@ from .models import Project, ToDoTask
 
 
 class ProjectModelSerializer(ModelSerializer):
-    users = StringRelatedField(many=True)
+    # users = StringRelatedField(many=True)
     class Meta:
         model = Project
         fields = '__all__'

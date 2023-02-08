@@ -1,5 +1,5 @@
 import React from "react"
-import {useParams} from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
 
 const ToDoItem = ({todotask}) => {
     return (
@@ -39,6 +39,7 @@ const ProjectDetails = ({projects, todotasks}) => {
                 </thead>
                 {filtered_todotasks.map((todotask)=> <ToDoItem todotask={todotask}/>)}
             </table>
+            <Link class='button is-light' to='/todos/create'>Создать задачу</Link>
         </div>
     )
 }

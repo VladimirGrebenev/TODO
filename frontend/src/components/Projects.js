@@ -35,7 +35,7 @@ const ProjectsList = ({projects, delete_project}) => {
                 </thead>
                 {projects.map((project) => <ProjectItem project={project} delete_project={delete_project}/>)}
             </table>
-            <Link to='/projects/create'>Создать проект</Link>
+            <Link class='button is-light' to='/projects/create'>Создать проект</Link>
         </div>
     )
 }

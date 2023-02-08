@@ -42,7 +42,7 @@ const ToDoTasksList = ({todotasks, delete_todo}) => {
                 </thead>
                 {todotasks.map((todotask)=> <ToDoItem todotask={todotask} delete_todo={delete_todo}/>)}
             </table>
-            <Link to='/todos/create'>Создать задачу</Link>
+            <Link class='button is-light' to='/todos/create'>Создать задачу</Link>
         </div>
     )
 }
