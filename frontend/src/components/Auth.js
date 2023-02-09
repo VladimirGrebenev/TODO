@@ -14,7 +14,7 @@ class LoginForm extends React.Component {
         );
     }
 
-    habdleSubmit(event) {
+    handleSubmit(event) {
         this.props.get_token(this.state.email, this.state.password)
         event.preventDefault()
     }
@@ -26,7 +26,7 @@ class LoginForm extends React.Component {
                 <div className="columns">
                     <div className="column"></div>
                     <div className="column is-one-third">
-                        <form onSubmit={(event) => this.habdleSubmit(event)}>
+                        <form onSubmit={(event) => this.handleSubmit(event)}>
                             <div className="field">
                                 <label className="label">Email</label>
                                 <div className="control has-icons-left">

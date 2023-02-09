@@ -21,23 +21,6 @@ class ToDoForm extends React.Component {
 
     render() {
         return (
-            // <form onSubmit={(event) => this.handleSubmit(event)}>
-            //     <div className="form-group">
-            //         <label for="description">description</label>
-            //         <input type="text" className="form-control" name="description"
-            //                value={this.state.description} onChange={(event) => this.handleChange(event)}/>
-            //     </div>
-            //     <div className="form-group">
-            //         <label htmlFor="project">project</label>
-            //         <select name="project" className='form-control'
-            //                 onChange={(event) => this.handleChange(event)}>
-            //             {this.props.projects.map((item) => <option
-            //                 value={item.id}>{item.title}</option>)}
-            //         </select>
-            //     </div>
-            //     <input type="submit" className="btn btn-primary" value="Save"/>
-            // </form>
-
             <div className="section">
                 <div className="columns">
                     <div className="column"></div>

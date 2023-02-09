@@ -21,25 +21,6 @@ class ProjectForm extends React.Component {
 
     render() {
         return (
-            // <form onSubmit={(event) => this.handleSubmit(event)}>
-            //     <div className="form-group">
-            //         <label for="title">title</label>
-            //         <input type="text" className="form-control" name="title"
-            //                value={this.state.title} onChange={(event) => this.handleChange(event)}/>
-            //     </div>
-            //     {/*<div className="form-group">*/}
-            //     {/*    <label for="users">users</label>*/}
-            //     {/*    <input type="text" className="form-control" name="users"*/}
-            //     {/*           value={this.state.users} onChange={(event) => this.handleChange(event)}/>*/}
-            //     {/*</div>*/}
-            //     <div className="form-group">
-            //         <label htmlFor="repo_link">repo_link</label>
-            //         <input type="text" className="form-control" name="repo_link"
-            //                value={this.state.repo_link} onChange={(event) => this.handleChange(event)}/>
-            //     </div>
-            //     <input type="submit" className="btn btn-primary" value="Save"/>
-            // </form>
-
             <div className="section">
                 <div className="columns">
                     <div className="column"></div>
@@ -54,7 +35,7 @@ class ProjectForm extends React.Component {
                                 </div>
                             </div>
                             <div className="field">
-                                <label className="label">Название проекта</label>
+                                <label className="label">Ссылка на репозиторий</label>
                                 <div className="control">
                                     <input name="repo_link" className="input" type="text" placeholder="ссылка на проект"
                                            value={this.state.repo_link}
