@@ -5,13 +5,11 @@ const UserItem = ({user}) => {
     return (
         <tr>
             <td>
-                <Link to={`user/${user.id}`}>{user.id}</Link>
+                <Link to={`user/${user.id}`}>{user.user_name}</Link>
             </td>
             <td>{user.first_name}</td>
             <td>{user.last_name}</td>
-            <td>{user.user_name}</td>
             <td>{user.email}</td>
-            <td>{user.date_joined}</td>
         </tr>
     )
 }
@@ -27,12 +25,10 @@ const UserList = ({users}) => {
             </p>
             <table className="table is-narrow is-fullwidth">
                 <thead className="has-background-info-light">
-                <th>User ID</th>
                 <th>First name</th>
                 <th>Last name</th>
                 <th>User Name</th>
                 <th>Email</th>
-                <th>Date joined</th>
                 </thead>
                 {users.map((user) => <UserItem user={user}/>)}
             </table>
