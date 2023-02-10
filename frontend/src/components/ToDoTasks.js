@@ -4,7 +4,6 @@ import {Link} from "react-router-dom";
 const ToDoItem = ({todotask, delete_todo}) => {
     return (
         <tr>
-            <td>{todotask.id}</td>
             <td>{todotask.project}</td>
             <td>{todotask.description}</td>
             <td>{todotask.created}</td>
@@ -31,7 +30,6 @@ const ToDoTasksList = ({todotasks, delete_todo}) => {
             </p>
             <table className="table is-narrow is-fullwidth">
                 <thead className="has-background-info-light">
-                <th>ID задачи</th>
                 <th>Проект</th>
                 <th>Задача</th>
                 <th>Создана</th>

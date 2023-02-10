@@ -4,8 +4,6 @@ import {Link, useParams} from "react-router-dom"
 const ToDoItem = ({todotask}) => {
     return (
         <tr>
-            <td>{todotask.id}</td>
-            <td>{todotask.project}</td>
             <td>{todotask.description}</td>
             <td>{todotask.created}</td>
             <td>{todotask.updated}</td>
@@ -29,8 +27,6 @@ const ProjectDetails = ({projects, todotasks}) => {
             </p>
             <table className="table is-narrow is-fullwidth">
                 <thead className="has-background-info-light">
-                <th>ID задачи</th>
-                <th>Проект</th>
                 <th>Задача</th>
                 <th>Создана</th>
                 <th>Обновлена</th>

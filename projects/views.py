@@ -14,7 +14,7 @@ class ToDoTaskLimitOffsetPagination(LimitOffsetPagination):
 
 
 class ProjectLimitOffsetPagination(LimitOffsetPagination):
-    default_limit = 10
+    default_limit = 20
 
 
 class ProjectModelViewSet(ModelViewSet):

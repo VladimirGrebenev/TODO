@@ -5,9 +5,8 @@ const ProjectItem = ({project, delete_project}) => {
     return (
         <tr>
             <td>
-                <Link to={`project/${project.id}`}>{project.id}</Link>
+                <Link to={`project/${project.id}`}>{project.title}</Link>
             </td>
-            <td>{project.title}</td>
             <td>{project.repo_link}</td>
             <td><button class='button is-danger' type='button'
                         onClick={()=>delete_project(project.id)}>Удалить</button></td>
@@ -26,7 +25,6 @@ const ProjectsList = ({projects, delete_project}) => {
             </p>
             <table className="table is-narrow is-fullwidth">
                 <thead className="has-background-info-light">
-                <th>ID проекта</th>
                 <th>Название</th>
                 <th>Репозиторий</th>
                 <th></th>
