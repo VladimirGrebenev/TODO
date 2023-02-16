@@ -8,6 +8,7 @@ from .managers import CustomUserManager
 # Create your models here.
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    # uuid = models.UUIDField(default=uuid4, primary_key=True)
     id = models.UUIDField(default=uuid4, primary_key=True, verbose_name='id')
     first_name = models.CharField(max_length=64, verbose_name='firstname')
     last_name = models.CharField(max_length=64, verbose_name='lastname')

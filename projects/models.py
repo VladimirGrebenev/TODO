@@ -6,6 +6,7 @@ from uuid import uuid4
 # Create your models here.
 
 class Project(models.Model):
+    # uuid = models.UUIDField(default=uuid4, primary_key=True)
     id = models.UUIDField(default=uuid4, primary_key=True, verbose_name='id')
     title = models.CharField(max_length=50, unique=True)
     users = models.ManyToManyField(CustomUser)
@@ -20,6 +21,7 @@ class Project(models.Model):
 
 
 class ToDoTask(models.Model):
+    # uuid = models.UUIDField(default=uuid4, primary_key=True)
     id = models.UUIDField(default=uuid4, primary_key=True, verbose_name='id')
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     description = models.CharField(max_length=500)
